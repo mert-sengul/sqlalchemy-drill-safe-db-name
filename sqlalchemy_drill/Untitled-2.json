@@ -1,0 +1,104 @@
+{
+    "id": {
+        "part1": 2094935257195515000,
+        "part2": -4120709287694936000
+    },
+    "type": 1,
+    "start": 1659718523702,
+    "end": 1659718526006,
+    "query": "SELECT `**` FROM `mongo`.`chargesoft-chargee-dev`.`payments` LIMIT 1",
+    "plan": "00-00    Screen : rowType = RecordType(DYNAMIC_STAR **): rowcount = 34.0, cumulative cost = {71.4 rows, 71.4 cpu, 0.0 io, 0.0 network, 0.0 memory}, id = 4245\n00-01      Project(**=[$0]) : rowType = RecordType(DYNAMIC_STAR **): rowcount = 34.0, cumulative cost = {68.0 rows, 68.0 cpu, 0.0 io, 0.0 network, 0.0 memory}, id = 4244\n00-02        Plugin(groupScan=[MongoGroupScan [MongoScanSpec=MongoScanSpec [dbName=\"chargesoft-chargee-dev\", collectionName=\"payments\", operations=[{\"$limit\": 1}]], useAggregate=true]]) : rowType = RecordType(DYNAMIC_STAR **): rowcount = 34.0, cumulative cost = {34.0 rows, 34.0 cpu, 0.0 io, 0.0 network, 0.0 memory}, id = 4215\n",
+    "foreman": {
+        "address": "37a9e04eaf3f",
+        "userPort": 31010,
+        "controlPort": 31011,
+        "dataPort": 31012,
+        "version": "1.20.2",
+        "state": 0
+    },
+    "state": 2,
+    "totalFragments": 1,
+    "finishedFragments": 0,
+    "fragmentProfile": [
+        {
+            "majorFragmentId": 0,
+            "minorFragmentProfile": [
+                {
+                    "state": 3,
+                    "minorFragmentId": 0,
+                    "operatorProfile": [
+                        {
+                            "inputProfile": [
+                                {
+                                    "records": 1,
+                                    "batches": 2,
+                                    "schemas": 1
+                                }
+                            ],
+                            "operatorId": 2,
+                            "operatorType": 47,
+                            "setupNanos": 0,
+                            "processNanos": 72128416,
+                            "peakLocalMemoryAllocated": 1146880,
+                            "waitNanos": 0,
+                            "operatorTypeName": "MONGO_SUB_SCAN"
+                        },
+                        {
+                            "inputProfile": [
+                                {
+                                    "records": 1,
+                                    "batches": 1,
+                                    "schemas": 1
+                                }
+                            ],
+                            "operatorId": 1,
+                            "operatorType": 10,
+                            "setupNanos": 3967691,
+                            "processNanos": 2550934,
+                            "peakLocalMemoryAllocated": 1146880,
+                            "waitNanos": 0,
+                            "operatorTypeName": "PROJECT"
+                        },
+                        {
+                            "inputProfile": [
+                                {
+                                    "records": 1,
+                                    "batches": 1,
+                                    "schemas": 1
+                                }
+                            ],
+                            "operatorId": 0,
+                            "operatorType": 13,
+                            "setupNanos": 0,
+                            "processNanos": 175416,
+                            "peakLocalMemoryAllocated": 0,
+                            "waitNanos": 87106174,
+                            "operatorTypeName": "SCREEN"
+                        }
+                    ],
+                    "startTime": 1659718525830,
+                    "endTime": 1659718526005,
+                    "memoryUsed": 0,
+                    "maxMemoryUsed": 3147136,
+                    "endpoint": {
+                        "address": "37a9e04eaf3f",
+                        "userPort": 31010,
+                        "controlPort": 31011,
+                        "dataPort": 31012,
+                        "version": "1.20.2",
+                        "state": 0
+                    },
+                    "lastUpdate": 1659718526005,
+                    "lastProgress": 1659718526005
+                }
+            ]
+        }
+    ],
+    "user": "anonymous",
+    "optionsJson": "[ ]",
+    "planEnd": 1659718525830,
+    "queueWaitEnd": 1659718525830,
+    "totalCost": 102,
+    "queueName": "Unknown",
+    "queryId": "1d12b484-5894-8bf8-c6d0-4cbc3c4a5709"
+}
