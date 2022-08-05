@@ -269,22 +269,19 @@ class DrillDialect(default.DefaultDialect):
         return []
 
     def get_schema_names(self, connection, **kw):
-
-        # Get table information
         query = "SHOW DATABASES"
-
         curs = connection.execute(query)
         result = []
         try:
-            for row in curs:
-                if row.SCHEMA_NAME == "information_schema":
-                    print("DRILLDBAPI - CUSTOM: row.SCHEMA_NAME is in lowercase!!! ", row.SCHEMA_NAME)
-                if row.SCHEMA_NAME != "cp.default" and row.SCHEMA_NAME != "INFORMATION_SCHEMA" and row.SCHEMA_NAME != "dfs.default":
-                    result.append(row.SCHEMA_NAME)
+            result.extend(
+                row.SCHEMA_NAME for row in curs if row.SCHEMA_NAME.lower() not in (
+                    s_name.lower() for s_name in (
+                        "cp.default", "INFORMATION_SCHEMA", "dfs.default"
+                        )
+                    )
+                )
         except Exception as ex:
-            logging.error(
-                ("Error in DrillDialect_sadrill.get_schema_names :: ", str(ex)))
-
+            logging.error(("Error in DrillDialect_sadrill.get_schema_names :: ", str(ex)))
         return tuple(result)
 
     def get_selected_workspace(self):
@@ -348,8 +345,9 @@ class DrillDialect(default.DefaultDialect):
         curs = connection.execute(
             "SELECT `TABLE_NAME` FROM INFORMATION_SCHEMA.views WHERE table_schema='" + schema + "'")
         try:
-            print(f'DRILLDBAPI - CUSTOM: {curs=}, {len(curs)}')
+            print("DRILLDBAPI - CUSTOM: base::DrillDialect::get_view_names: curs: ", curs)
             for row in curs:
+                print("DRILLDBAPI - CUSTOM: base::DrillDialect::get_view_names: curs-row: ", row)
                 myname = row.TABLE_NAME
                 view_names.append(myname)
 
@@ -419,8 +417,10 @@ class DrillDialect(default.DefaultDialect):
 
             column_metadata = connection.execute(q).cursor.description
 
-            for row in column_metadata:
+            print("DRILLDBAPI - CUSTOM: base::DrillDialect::get_columns: column_metadata: ", column_metadata)
 
+            for row in column_metadata:
+                print("DRILLDBAPI - CUSTOM: base::DrillDialect::get_columns: row: ", row)
                 #  Get rid of precision information in data types
                 data_type = row[1].lower()
                 pattern = r"[a-zA-Z]+\(\d+, \d+\)"
@@ -453,6 +453,7 @@ class DrillDialect(default.DefaultDialect):
             }
             result.append(column)
         logging.debug(result)
+        print("DRILLDBAPI - CUSTOM: base::DrillDialect::get_columns: result: ", result)
         return result
 
     def get_plugin_type(self, connection, plugin=None):
