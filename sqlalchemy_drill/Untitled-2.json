@@ -1,0 +1,107 @@
+{
+    "id": {
+        "part1": 2094937064660664600,
+        "part2": -1924362603588903000
+    },
+    "type": 1,
+    "start": 1659718102763,
+    "end": 1659718105647,
+    "query": "SELECT `**` FROM `mongo`.`chargesoft-chargee-dev`.`payments` LIMIT 1",
+    "plan": "00-00    Screen : rowType = RecordType(DYNAMIC_STAR **): rowcount = 34.0, cumulative cost = {71.4 rows, 71.4 cpu, 0.0 io, 0.0 network, 0.0 memory}, id = 4067\n00-01      Project(**=[$0]) : rowType = RecordType(DYNAMIC_STAR **): rowcount = 34.0, cumulative cost = {68.0 rows, 68.0 cpu, 0.0 io, 0.0 network, 0.0 memory}, id = 4066\n00-02        Plugin(groupScan=[MongoGroupScan [MongoScanSpec=MongoScanSpec [dbName=\"chargesoft-chargee-dev\", collectionName=\"payments\", operations=[{\"$limit\": 1}]], useAggregate=true]]) : rowType = RecordType(DYNAMIC_STAR **): rowcount = 34.0, cumulative cost = {34.0 rows, 34.0 cpu, 0.0 io, 0.0 network, 0.0 memory}, id = 4037\n",
+    "foreman": {
+        "address": "37a9e04eaf3f",
+        "userPort": 31010,
+        "controlPort": 31011,
+        "dataPort": 31012,
+        "version": "1.20.2",
+        "state": 0
+    },
+    "state": 4,
+    "totalFragments": 1,
+    "finishedFragments": 0,
+    "fragmentProfile": [
+        {
+            "majorFragmentId": 0,
+            "minorFragmentProfile": [
+                {
+                    "state": 2,
+                    "minorFragmentId": 0,
+                    "operatorProfile": [
+                        {
+                            "inputProfile": [
+                                {
+                                    "records": 0,
+                                    "batches": 0,
+                                    "schemas": 0
+                                }
+                            ],
+                            "operatorId": 2,
+                            "operatorType": 47,
+                            "setupNanos": 0,
+                            "processNanos": 275027,
+                            "peakLocalMemoryAllocated": 0,
+                            "waitNanos": 0,
+                            "operatorTypeName": "MONGO_SUB_SCAN"
+                        },
+                        {
+                            "inputProfile": [
+                                {
+                                    "records": 0,
+                                    "batches": 0,
+                                    "schemas": 0
+                                }
+                            ],
+                            "operatorId": 1,
+                            "operatorType": 10,
+                            "setupNanos": 0,
+                            "processNanos": 0,
+                            "peakLocalMemoryAllocated": 0,
+                            "waitNanos": 0,
+                            "operatorTypeName": "PROJECT"
+                        },
+                        {
+                            "inputProfile": [
+                                {
+                                    "records": 0,
+                                    "batches": 0,
+                                    "schemas": 0
+                                }
+                            ],
+                            "operatorId": 0,
+                            "operatorType": 13,
+                            "setupNanos": 0,
+                            "processNanos": 0,
+                            "peakLocalMemoryAllocated": 0,
+                            "waitNanos": 0,
+                            "operatorTypeName": "SCREEN"
+                        }
+                    ],
+                    "startTime": 1659718105338,
+                    "endTime": 1659718105372,
+                    "memoryUsed": 3000000,
+                    "maxMemoryUsed": 3000000,
+                    "endpoint": {
+                        "address": "37a9e04eaf3f",
+                        "userPort": 31010,
+                        "controlPort": 31011,
+                        "dataPort": 31012,
+                        "version": "1.20.2",
+                        "state": 0
+                    },
+                    "lastUpdate": 1659718105373,
+                    "lastProgress": 1659718105373
+                }
+            ]
+        }
+    ],
+    "user": "anonymous",
+    "error": "SYSTEM ERROR: Drill Remote Exception\n\n\nPlease, refer to logs for more information.\n",
+    "verboseError": "SYSTEM ERROR: Drill Remote Exception\n\n\nPlease, refer to logs for more information.\n\n\n  (java.lang.IllegalArgumentException) \n    org.apache.drill.shaded.guava.com.google.common.base.Preconditions.checkArgument():128\n    org.apache.drill.exec.record.metadata.VariantSchema.addType():76\n    org.apache.drill.exec.physical.resultSet.model.single.SingleSchemaInference.inferListSchema():119\n    org.apache.drill.exec.physical.resultSet.model.single.SingleSchemaInference.inferVector():81\n    org.apache.drill.exec.physical.resultSet.model.single.SingleSchemaInference.infer():64\n    org.apache.drill.exec.physical.rowSet.DirectRowSet.fromContainer():80\n    org.apache.drill.exec.physical.resultSet.impl.PushResultSetReaderImpl.createRowSet():100\n    org.apache.drill.exec.physical.resultSet.impl.PushResultSetReaderImpl.start():85\n    org.apache.drill.exec.server.rest.stream.StreamingHttpConnection.sendData():116\n    org.apache.drill.exec.ops.AccountingUserConnection.sendData():43\n    org.apache.drill.exec.physical.impl.ScreenCreator$ScreenRoot.innerNext():106\n    org.apache.drill.exec.physical.impl.BaseRootExec.next():93\n    org.apache.drill.exec.work.fragment.FragmentExecutor.lambda$run$0():321\n    .......():0\n    org.apache.hadoop.security.UserGroupInformation.doAs():1762\n    org.apache.drill.exec.work.fragment.FragmentExecutor.run():310\n    org.apache.drill.common.SelfCleaningRunnable.run():38\n    .......():0\n",
+    "errorId": "59f7f961-5336-49f1-ac34-3371f5ed83a0",
+    "optionsJson": "[ ]",
+    "planEnd": 1659718105338,
+    "queueWaitEnd": 1659718105338,
+    "totalCost": 102,
+    "queueName": "Unknown",
+    "queryId": "1d12b629-2de6-0157-e54b-4a6862099fb2"
+}
