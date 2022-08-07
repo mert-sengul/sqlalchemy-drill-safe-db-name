@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from json import dumps
-from pprint import pprint
 from typing import List
 from requests import Session, Response
 import re
@@ -386,13 +385,13 @@ class Connection(object):
         logger.debug('sends an HTTP POST with payload')
         logger.debug(payload)
 
-        print("DRILLDBAPI - CUSTOM:")
-        print("payload: ", payload)
-        print("payload - detail:")
-        for _k, _v in payload:
-            pprint({_k: _v.__repr__()})
-        print("headers:")
-        pprint({_k: _v.__repr__() for _k, _v in api_globals._HEADER})
+        # print("DRILLDBAPI - CUSTOM:")
+        # print("payload: ", payload)
+        # print("payload - detail:")
+        # for _k, _v in payload:
+        #     print({_k: _v.__repr__()})
+        # print("headers:")
+        # pprint({_k: _v.__repr__() for _k, _v in api_globals._HEADER})
 
         if resp.status_code == 200:
             return resp
