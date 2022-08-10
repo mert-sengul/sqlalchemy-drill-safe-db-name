@@ -197,11 +197,20 @@ class Cursor(object):
             self.substitute_in_query(operation, parameters)
         )
 
+        logger.debug(
+            f'DRILLDBAPI - CUSTOM: response: \n{resp}\n'
+        )
+
         if resp.status_code != 200:
             err_msg = resp.json().get('errorMessage', None)
             raise ProgrammingError(err_msg, resp.status_code)
 
         self._result_event_stream = parse(RequestsStreamWrapper(resp))
+
+        logger.debug(
+            f'DRILLDBAPI - CUSTOM: self._result_event_stream: \n{self._result_event_stream}\n'
+        )
+
         row_data_present = self._outer_parsing_loop()
         # The leading result metadata has now been parsed.
 
