@@ -148,8 +148,9 @@ class Cursor(object):
                     # stop here so that row parsing can be driven by user calls
                     # to fetchN
                     return True
-                if value == 'metadata':
-                    return True
+                    # continue
+                # if value == 'metadata':
+                    # return True
                 else:
                     # save the parsed object to the result metadata dict
                     self.result_md[value] = next(
@@ -221,6 +222,9 @@ class Cursor(object):
         logger.info(
             f'received Drill query ID {self.result_md.get("queryId", None)}.'
         )
+        md = resp.json().get("metadata")
+        if md:
+            self.result_md["metadata"] = md
 
         logger.debug(
             f'DRILLDBAPI - CUSTOM: result_md: \n{self.result_md}\n'
