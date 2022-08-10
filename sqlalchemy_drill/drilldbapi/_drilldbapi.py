@@ -209,6 +209,10 @@ class Cursor(object):
             f'received Drill query ID {self.result_md.get("queryId", None)}.'
         )
 
+        logger.debug(
+            f'DRILLDBAPI - CUSTOM: result_md: \n{self.result_md}\n'
+        )
+
         if not row_data_present:
             return
 
@@ -218,6 +222,11 @@ class Cursor(object):
             md = self.result_md['metadata']
             # strip size information from column types e.g. VARCHAR(10)
             basic_coltypes = [re.sub(r'\(.*\)', '', m) for m in md]
+
+            logger.debug(
+                f'DRILLDBAPI - CUSTOM: basic_coltypes: \n{basic_coltypes}\n'
+            )
+
             self._gen_description(basic_coltypes)
 
             self._typecaster_list = [
