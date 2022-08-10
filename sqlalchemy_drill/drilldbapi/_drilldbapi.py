@@ -46,7 +46,9 @@ class Cursor(object):
         return query
 
     def __init__(self, conn):
-
+        logger.debug(
+            f'DRILLDBAPI - CUSTOM: connection: \n{conn=}\n{type(conn)=}'
+        )
         self.arraysize: int = 200
         self.description: tuple = None
         self.connection = conn
@@ -146,6 +148,8 @@ class Cursor(object):
                     # stop here so that row parsing can be driven by user calls
                     # to fetchN
                     return True
+                if value == 'metadata':
+                    return True
                 else:
                     # save the parsed object to the result metadata dict
                     self.result_md[value] = next(
@@ -198,7 +202,7 @@ class Cursor(object):
         )
 
         logger.debug(
-            f'DRILLDBAPI - CUSTOM: response: \n{resp}\n'
+            f'DRILLDBAPI - CUSTOM: response: \n{resp=}\n{resp.json()=}'
         )
 
         if resp.status_code != 200:
