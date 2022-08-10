@@ -379,19 +379,19 @@ class Connection(object):
         )
         self.drill_version = resp.json()['rows'][0]['version']
         logger.info(f'has connected to Drill version {self.drill_version}.')
-
-        if self.drill_version < '1.19':
-            self.typecasters = {}
-        else:
-            # Starting in 1.19 the Drill REST API returns UNIX times
-            self.typecasters = {
-                'DATE': lambda v: DateFromTicks(v),
-                'TIME': lambda v: TimeFromTicks(v),
-                'TIMESTAMP': lambda v: TimestampFromTicks(v)
-            }
-            logger.debug(
-                'sets up typecasting functions for Drill >= 1.19.'
-            )
+        self.typecasters = {}
+        # if self.drill_version < '1.19':
+        #     self.typecasters = {}
+        # else:
+        #     # Starting in 1.19 the Drill REST API returns UNIX times
+        #     self.typecasters = {
+        #         'DATE': lambda v: DateFromTicks(v),
+        #         'TIME': lambda v: TimeFromTicks(v),
+        #         'TIMESTAMP': lambda v: TimestampFromTicks(v)
+        #     }
+        #     logger.debug(
+        #         'sets up typecasting functions for Drill >= 1.19.'
+        #     )
 
     def submit_query(self, query: str):
         payload = api_globals._PAYLOAD.copy()
